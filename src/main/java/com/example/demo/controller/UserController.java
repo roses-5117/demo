@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.data.entity.User;
 import com.example.demo.data.repository.UserRepository;
+import com.example.demo.form.UserForm;
 
 @Controller
 public class UserController {
@@ -26,5 +27,15 @@ public class UserController {
 		// 取得したリストをテンプレートに渡す
 		model.addAttribute("users", users);
 		return "users";
+	}
+
+	// getNewUserメソッドを追加
+	@GetMapping("/newuser")
+	public String getNewUser(Model model) {
+		// Modelに空のUserFormを追加
+		UserForm userForm = new UserForm();
+		model.addAttribute("userForm", userForm);
+		// テンプレートは src/main/resources/templates/newuser.html とします。
+		return "newuser";
 	}
 }
