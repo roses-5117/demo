@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<!-- 名前とEmailの入力フォームを作成 -->
-		<form th:object="${userForm}">
+		<form th:object="${userForm}" th:action="@{/newuser}" th:method="post">
 			<table>
 				<tr>
 					<th>名前</th>
@@ -25,5 +25,9 @@
 			</table>
 			<input type="submit" value="登録">
 		</form>
+		
+		<!-- ユーザー一覧画面へのリンク追加 -->
+		<a th:href="@{/users}">ユーザー一覧へ</a>
+	
 	</body>
 </html>

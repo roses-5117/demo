@@ -1,11 +1,20 @@
 package com.example.demo.form;
 
+// import追加
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 
 @Data
 public class UserForm {
 
-    private String name;
+	// nameへのバリデーション設定を追加
+	@Size(min = 1, max = 200)
+	private String name;
 
-    private String email;
+	// emailへのバリデーション設定を追加
+	@Size(min = 1, max = 200)
+	@Email
+	private String email;
 }
