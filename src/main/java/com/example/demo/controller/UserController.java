@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,8 +44,13 @@ public class UserController {
 
 	// マッピング設定
 	@PostMapping("/newuser")
-	// 引数のuserFormにValidatedアノテーションを追加
-	public String registerUser(@Validated UserForm userForm) {
+	// 引数にBindingResultを追加
+	public String registerUser(@Validated UserForm userForm, BindingResult bindingResult) {
+		// バリデーションの結果、エラーがあるかどうかチェック
+		if (bindingResult.hasErrors()) {
+			// エラーがある場合はユーザー登録画面を返す
+			return "newuser";
+		}
 		User user = new User();
 		user.setName(userForm.getName());
 		user.setEmail(userForm.getEmail());
